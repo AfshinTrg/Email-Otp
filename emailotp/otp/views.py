@@ -43,8 +43,6 @@ class VerifyCode(View):
         user_session = request.session['email_info']
         code_instance = OtpCode.objects.get(email=user_session['email'])
         expired_time = code_instance.created + timedelta(minutes=1)
-        print('=' * 90)
-        print(expired_time)
         if expired_time > datetime.now():
             form = VerifyCodeForm(request.POST)
             if form.is_valid():
